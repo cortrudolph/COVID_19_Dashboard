@@ -36,12 +36,16 @@ Example text.
 dataset <- readr::read_csv("data/data.csv")
 ```
 
+### Example Interactive Table
+
 ```{r}
 DT::datatable(dataset, 
               rownames = FALSE, 
               filter="top", 
               options = list(pageLength = 5, scrollX=T) )
 ```
+
+### Example Interactive Plot #1
 
 ```{r}
 g <- ggplot(dataset, aes(x = Month_Ordered, y = Variable_1)) +
@@ -52,3 +56,11 @@ g <- ggplot(dataset, aes(x = Month_Ordered, y = Variable_1)) +
 plotly::ggplotly(g)
 ```
 
+### Example Interactive Plot #2
+```{r}
+g <- ggplot(dataset, aes(x = Month_Ordered, y = Variable_1)) +
+  geom_line() +
+  geom_point()
+
+plotly::ggplotly(g)
+```
