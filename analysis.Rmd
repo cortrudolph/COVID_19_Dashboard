@@ -60,9 +60,8 @@ plot1
 
 ### Example Dynamic Plot
 
-```{r plotly=TRUE}
-plotly::ggplotly(plot1) %>%
-  as.widget() %>% list() %>% tagList()
+```{r}
+plotly::ggplotly(plot1)
 ```
 
 

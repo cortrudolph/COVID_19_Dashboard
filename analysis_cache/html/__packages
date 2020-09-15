@@ -3,6 +3,7 @@ DT
 readr
 ggplot2
 plotly
+htmltools
 tidyverse
 tibble
 tidyr
@@ -10,4 +11,3 @@ purrr
 dplyr
 stringr
 forcats
-htmltools
