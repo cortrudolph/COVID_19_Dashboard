@@ -1,3 +1,12 @@
 base
 DT
 readr
+ggplot2
+plotly
+tidyverse
+tibble
+tidyr
+purrr
+dplyr
+stringr
+forcats

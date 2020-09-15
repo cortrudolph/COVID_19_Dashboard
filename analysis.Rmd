@@ -17,6 +17,8 @@ knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 ```{r}
 library(DT)
 library(readr)
+library(plotly)
+library(tidyverse)
 ```
 
 
@@ -31,33 +33,9 @@ Example text.
 
 ## Example R Analysis
 
-Example text.
-```{r}
-sample1 <- rnorm(100, mean=0, sd=1)
-sample2 <- rnorm(100, mean=0, sd=1)
-sample3 <- rnorm(100, mean=0, sd=1)
-samples <- cbind.data.frame(sample1, sample2, sample3)
-
-hist(samples[,1])
-hist(samples[,2])
-hist(samples[,3])
-
-```
-
-```{r}
-DT::datatable(samples, 
-              rownames = FALSE, 
-              filter="top", 
-              options = list(pageLength = 5, scrollX=T) )
-```
-
-
-# Example Analysis #2
-
 ```{r}
 dataset <- readr::read_csv("data/data.csv")
 ```
-
 
 ```{r}
 DT::datatable(dataset, 
@@ -65,3 +43,13 @@ DT::datatable(dataset,
               filter="top", 
               options = list(pageLength = 5, scrollX=T) )
 ```
+
+```{r}
+g <- ggplot(dataset, aes(x = Month_Ordered, y = Variable_1)) +
+  geom_bar(stat="identity") +
+  geom_line() +
+  geom_point()
+
+plotly::ggplotly(g)
+```
+
