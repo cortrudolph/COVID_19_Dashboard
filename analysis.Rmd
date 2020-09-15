@@ -48,7 +48,7 @@ DT::datatable(dataset,
 ### Example Interactive Plot
 
 ```{r}
-g <- ggplot(dataset, aes(x = Month_Ordered, y = Variable_1)) +
+g <- ggplot2::ggplot(dataset, aes(x = Month_Ordered, y = Variable_1)) +
   geom_bar(stat="identity") +
   geom_line() +
   geom_point()
