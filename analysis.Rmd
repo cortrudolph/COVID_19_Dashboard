@@ -22,7 +22,6 @@ library(tidyverse)
 ```
 
 
-
 # Example Analysis #1
 
 Last compiled: `r Sys.Date()` Example text.
