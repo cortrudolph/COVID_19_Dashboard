@@ -44,21 +44,10 @@ DT::datatable(dataset,
 ```
 
 ```{r}
-g <- ggplot(dataset, aes(x = Month_Ordered, y = Variable_1, color=factor(Group))) +
-  #geom_bar(stat="identity", position=position_dodge()) +
+g <- ggplot(dataset, aes(x = Month_Ordered, y = Variable_1)) +
+  geom_bar(stat="identity") +
   geom_line() +
   geom_point()
-
-g
-
-plotly::ggplotly(g)
-```
-
-```{r}
-g <- ggplot(dataset, aes(x = Month_Ordered, y = Variable_2, fill=factor(Group))) +
-  geom_bar(stat="identity", position=position_dodge())
-
-g
 
 plotly::ggplotly(g)
 ```
