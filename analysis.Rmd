@@ -45,7 +45,7 @@ DT::datatable(dataset,
               options = list(pageLength = 5, scrollX=T) )
 ```
 
-### Example Interactive Plot
+### Example Plot
 
 ```{r}
 g <- ggplot2::ggplot(dataset, aes(x = Month_Ordered, y = Variable_1)) +
@@ -53,5 +53,9 @@ g <- ggplot2::ggplot(dataset, aes(x = Month_Ordered, y = Variable_1)) +
   geom_line() +
   geom_point()
 
-plotly::ggplotly(g)
+g
 ```
+
+<!-- ```{r plotly=TRUE} -->
+<!-- plotly::ggplotly(g) -->
+<!-- ``` -->
