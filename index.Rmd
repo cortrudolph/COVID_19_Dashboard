@@ -1,0 +1,47 @@
+---
+title: "COVID-19 Dashboard"
+output: html_document
+---
+
+<style type="text/css">
+.title {
+  display: none;
+}
+
+#getting-started img {
+  margin-right: 10px;
+}
+
+</style>
+
+<div class="row" style="padding-top: 30px;">
+<div class="col-sm-6">
+
+# **COVID-19 Dashboard**
+
+Example Text
+
+## Example Text
+
+1. Example Text
+
+2. Example Text
+
+3. Example Text
+
+4. Example Text
+
+</div>
+<div class="col-sm-6">
+
+### [Website: Example](https://www.lw.uni-leipzig.de/aopsych)
+<a href = "https://www.lw.uni-leipzig.de/aopsych">
+<img src="images/logo1.png">
+</a>
+
+### [Website: Example](https://www.cortrudolph.com)
+<a href = "https://www.cortrudolph.com">
+<img src="images/logo2.png" width="200" height="225">
+
+</a>
+</div>

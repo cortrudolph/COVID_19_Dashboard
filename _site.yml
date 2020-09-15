@@ -1,0 +1,11 @@
+name: "COVID-19 Dashboard"
+navbar:
+  title: "COVID-19 Dashboard"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Analysis"
+      href: analysis.html
+    - text: "Links"
+      href: links.html
+output_dir: "docs"

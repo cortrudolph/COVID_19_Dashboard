@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Analysis</title>
+
+<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.2/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.4/datatables.js"></script>
+<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet" />
+<script src="site_libs/nouislider-7.0.10/jquery.nouislider.min.js"></script>
+<link href="site_libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet" />
+<script src="site_libs/selectize-0.12.0/selectize.min.js"></script>
+<link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">COVID-19 Dashboard</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="analysis.html">Analysis</a>
+</li>
+<li>
+  <a href="links.html">Links</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Analysis</h1>
+
+</div>
+
+
+<pre class="r"><code>library(DT)
+library(readr)</code></pre>
+<div id="example-analysis-1" class="section level1">
+<h1>Example Analysis #1</h1>
+<p>Last compiled: 2020-09-15 Example text.</p>
+<div id="second-level-header" class="section level2">
+<h2>Second level header</h2>
+<p>Example text.</p>
+</div>
+<div id="example-r-analysis" class="section level2">
+<h2>Example R Analysis</h2>
+<p>Example text.</p>
+<pre class="r"><code>sample1 &lt;- rnorm(100, mean=0, sd=1)
+sample2 &lt;- rnorm(100, mean=0, sd=1)
+sample3 &lt;- rnorm(100, mean=0, sd=1)
+samples &lt;- cbind.data.frame(sample1, sample2, sample3)
+
+hist(samples[,1])</code></pre>
+<p><img src="analysis_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code>hist(samples[,2])</code></pre>
+<p><img src="analysis_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<pre class="r"><code>hist(samples[,3])</code></pre>
+<p><img src="analysis_files/figure-html/unnamed-chunk-2-3.png" width="672" /></p>
+<pre class="r"><code>DT::datatable(samples, 
+              rownames = FALSE, 
+              filter=&quot;top&quot;, 
+              options = list(pageLength = 5, scrollX=T) )</code></pre>
+<div id="htmlwidget-cb203067cd874e2dd9f6" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cb203067cd874e2dd9f6">{"x":{"filter":"top","filterHTML":"<tr>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"-2.19268803566076\" data-max=\"1.93365663054559\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"-3.00160459842196\" data-max=\"1.95345528829021\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"-2.6714247325581\" data-max=\"2.42047319744557\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[[-0.746055876371618,0.463317413374091,0.746610081881825,-0.834443430695074,0.389490146177356,-2.19268803566076,0.166555793718934,1.31578457576975,1.88281517761814,0.973502429492729,-0.374740438948248,-0.485044465720609,-0.62374813114528,-0.41285499320711,0.701128866173473,-0.967595692294065,-0.897411471985945,-0.858604931954571,-1.49637849390392,0.610358908995446,1.06775584438257,-1.33007341965592,-0.385719182148443,-0.640005307876768,-1.36909848509649,0.237701165405493,1.16705620210874,0.0436569042458754,-1.31103486064733,-0.314027782173254,0.163415723318913,-0.369027661894118,1.91354582943195,1.42749508811437,-0.934307214122061,-1.23031473613605,0.99088742510051,0.264590949500731,0.613447507433564,-0.638243740202249,1.48167632198896,-0.455974029202384,0.0380262553909546,-1.23801399552901,-0.257077796445046,-0.59812579439086,0.370056483195354,-0.00429621036687756,-0.192014670876803,0.202454786719316,0.0571440008667591,1.27701223724708,0.0783937243319328,0.729647036933281,-0.988613325279539,0.644015784391115,0.868285072869995,0.571148692384859,1.06230904236595,-0.107359472523024,0.299644530050719,0.150979214421554,-0.888225128093606,-0.172309751215993,0.123983090157015,-1.87005503763365,0.123583822319839,0.419368982798014,-0.685401151827731,-0.060875252754661,-0.951384929455351,0.932511748031723,0.987844361438907,0.540876352447894,-1.44851830911352,0.168702072659176,-1.13688977497497,0.922293710151432,0.37056506370203,0.901947017898752,0.284664448717779,-0.0611682801049975,0.208827265751858,1.72144689551738,0.664069707141839,0.598292244884751,0.870000985804004,0.150412911874735,-0.11405055376339,1.39198492428611,1.93365663054559,-1.30282527338925,1.43885864513346,1.4537150985179,1.14465643894537,0.915064987019409,1.39733302113645,-1.0710429947194,0.537918354224984,-0.161808066189704],[0.045334842846101,-0.0593828241147621,-0.45466018170515,-0.193056615804323,1.94946269638284,-0.288324507742359,-0.458032121462952,-1.1021945315179,-0.400905089927004,0.695351375588326,-1.26751734634703,-0.693943067789599,0.240728075079594,-0.577570889967338,-1.4756906080296,-1.89990292686951,-1.81777746847701,-1.24251027836582,-0.742617123329999,0.1237677929702,1.28195631124848,-0.879177450037177,1.66583495652482,1.2586869720747,0.0686691382809986,-0.138820973127371,-0.763790826347683,-0.365831497970146,-1.36356394089151,1.54829596279445,0.38877950685061,-0.241203083131281,-0.220028028355276,-1.41957511063204,1.26767028360324,-0.416005784166581,0.119201472856915,1.95345528829021,0.260956199781953,0.550926609601897,1.62851856666315,-1.20045798224732,1.51285228291381,0.311814524480559,-3.00160459842196,1.91442280817863,0.767060740511066,0.512174010017315,0.917917563083681,0.0023981895844036,0.225612461690228,0.905710216155456,1.13333877535394,-1.34663016009437,0.199838891075872,-1.01369982203672,0.35300163724481,-0.266026808207713,-0.451873860930912,-0.644337312141362,1.75397194073554,-0.238305111207472,0.907920553175844,0.0796540050446634,-0.491939762419047,0.0962580938915572,0.111284178516769,0.524074855868451,1.61588050492126,-0.346717453342292,0.152100707062767,-0.582461556423191,-2.34183803693744,-0.627618957386762,-0.798478646924076,0.884852796792255,-0.737081372175736,0.665806357791521,-1.29483096556268,0.52139611790174,-1.65441324148893,-0.454807467813798,0.319155878117153,-0.110525668482653,-0.135634371997953,1.43484275506497,0.53779761948916,-0.557717240004696,0.456323473451434,-0.363620122431545,0.496951890399823,-1.89353841464552,0.708821493918368,1.91952153941991,0.476017203431064,0.460044185921689,1.13797754693206,-0.373289420293341,0.713772058744303,-0.390318010924],[-0.714693981655551,1.65430510383173,1.23829036969239,-0.265975713603832,1.76844290375127,-1.43027308975197,-2.6714247325581,-1.31526875109054,0.267451142128797,0.145229857696408,0.931324224910409,-1.91727083945032,0.185599871194922,-0.778821874378091,0.883030429259662,0.31269725933989,0.663491161621443,0.0308138120893159,-1.47666954330789,-0.40404128292772,2.42047319744557,0.623744105158119,-0.11166161818602,-0.190328013178454,0.756280460210962,1.69812482068752,-0.48079631657621,0.783860822759652,0.87214880376214,-0.420901916802129,-0.992852950990077,0.0240530213605868,1.7063795310832,-0.474131886298695,1.03058231940378,2.34757531197503,-0.906095088350333,-1.11080692666482,-0.54179963154785,1.38175384857558,0.837738071388424,0.144770127812718,-1.55866252618657,-1.5323954954446,0.563473610473913,1.04618569084683,-0.974467822833251,-0.489352875546542,1.48963565631747,-0.121319051290395,0.736398173618597,-0.401073075721186,1.56629722846117,0.0806395286324294,0.439824706080438,0.371509948393072,1.03966183343506,-2.2369372350755,-0.636574642156887,0.828284807852594,0.706004345913429,0.104308658147111,0.818296521187057,-1.58800185660651,0.204520675216766,-0.194302729549386,1.21686205209571,-0.874820393465095,0.807370417336585,1.0134155236887,-0.0102018216537509,0.376564746180498,0.528538453366021,-1.14059670838525,0.148661627285525,1.72973502228762,-2.26486976486948,0.108871376099241,1.71953066800263,-0.649452801841367,-0.819854817393255,-1.57164834828796,-0.0929793804122155,-0.770588326280758,-1.409878365029,0.208574657044664,-1.16783860020993,-0.0431803575287544,-0.203748313413708,0.735903204776784,-0.614896870146389,-0.608612264269014,-0.580151212224099,1.59180518193361,1.20474716928597,0.375257240327048,1.32282456805752,-0.296219008815192,0.356294006601369,0.8912198395819]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>sample1<\/th>\n      <th>sample2<\/th>\n      <th>sample3<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[0,1,2]}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="example-analysis-2" class="section level1">
+<h1>Example Analysis #2</h1>
+<pre class="r"><code>dataset &lt;- readr::read_csv(&quot;data/data.csv&quot;)</code></pre>
+<pre class="r"><code>DT::datatable(dataset, 
+              rownames = FALSE, 
+              filter=&quot;top&quot;, 
+              options = list(pageLength = 5, scrollX=T) )</code></pre>
+<div id="htmlwidget-cb203067cd874e2dd9f6" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cb203067cd874e2dd9f6">{"x":{"filter":"top","filterHTML":"<tr>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1\" data-max=\"19\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1\" data-max=\"5\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1\" data-max=\"5\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1\" data-max=\"5\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19],[3,3,5,5,3,1,3,1,2,5,2,1,3,4,1,5,2,4,5],[1,1,4,3,4,5,1,2,4,1,3,5,1,5,1,1,5,1,5],[3,4,5,4,4,2,4,3,5,2,3,4,3,4,5,1,4,2,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>ID<\/th>\n      <th>X1<\/th>\n      <th>X2<\/th>\n      <th>X3<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+---
+title: "Analysis"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 1
+    #code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
+```
+
+```{r}
+library(DT)
+library(readr)
+```
+
+
+
+# Example Analysis #1
+
+Last compiled: `r Sys.Date()` Example text.
+
+## Second level header
+
+Example text.
+
+## Example R Analysis
+
+Example text.
+```{r}
+sample1 <- rnorm(100, mean=0, sd=1)
+sample2 <- rnorm(100, mean=0, sd=1)
+sample3 <- rnorm(100, mean=0, sd=1)
+samples <- cbind.data.frame(sample1, sample2, sample3)
+
+hist(samples[,1])
+hist(samples[,2])
+hist(samples[,3])
+
+```
+
+```{r}
+DT::datatable(samples, 
+              rownames = FALSE, 
+              filter="top", 
+              options = list(pageLength = 5, scrollX=T) )
+```
+
+
+# Example Analysis #2
+
+```{r}
+dataset <- readr::read_csv("data/data.csv")
+```
+
+
+```{r}
+DT::datatable(dataset, 
+              rownames = FALSE, 
+              filter="top", 
+              options = list(pageLength = 5, scrollX=T) )
+```
