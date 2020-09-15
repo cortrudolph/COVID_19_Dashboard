@@ -18,6 +18,7 @@ knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 library(DT)
 library(readr)
 library(plotly)
+library(htmltools)
 library(tidyverse)
 ```
 
@@ -48,14 +49,20 @@ DT::datatable(dataset,
 ### Example Plot
 
 ```{r}
-g <- ggplot2::ggplot(dataset, aes(x = Month_Ordered, y = Variable_1)) +
+plot1 <- ggplot2::ggplot(dataset, aes(x = Month_Ordered, y = Variable_1)) +
   geom_bar(stat="identity") +
   geom_line() +
   geom_point()
 
-g
+plot1
 ```
 
-<!-- ```{r plotly=TRUE} -->
-<!-- plotly::ggplotly(g) -->
-<!-- ``` -->
+
+### Example Dynamic Plot
+
+```{r plotly=TRUE}
+plotly::ggplotly(plot1) %>%
+  as.widget() %>% list() %>% tagList()
+```
+
+

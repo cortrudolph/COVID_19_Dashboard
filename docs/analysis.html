@@ -26,7 +26,7 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<script src="site_libs/htmlwidgets-1.2/htmlwidgets.js"></script>
+<script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
 <script src="site_libs/datatables-binding-0.4/datatables.js"></script>
 <link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
@@ -38,6 +38,10 @@
 <script src="site_libs/selectize-0.12.0/selectize.min.js"></script>
 <link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
 <script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<script src="site_libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -382,6 +386,7 @@ div.tocify {
 <pre class="r"><code>library(DT)
 library(readr)
 library(plotly)
+library(htmltools)
 library(tidyverse)</code></pre>
 <div id="example-analysis-1" class="section level1">
 <h1>Example Analysis #1</h1>
@@ -404,16 +409,20 @@ library(tidyverse)</code></pre>
 </div>
 <div id="example-plot" class="section level3">
 <h3>Example Plot</h3>
-<pre class="r"><code>g &lt;- ggplot2::ggplot(dataset, aes(x = Month_Ordered, y = Variable_1)) +
+<pre class="r"><code>plot1 &lt;- ggplot2::ggplot(dataset, aes(x = Month_Ordered, y = Variable_1)) +
   geom_bar(stat=&quot;identity&quot;) +
   geom_line() +
   geom_point()
 
-g</code></pre>
+plot1</code></pre>
 <p><img src="analysis_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<!-- ```{r plotly=TRUE} -->
-<!-- plotly::ggplotly(g) -->
-<!-- ``` -->
+</div>
+<div id="example-dynamic-plot" class="section level3">
+<h3>Example Dynamic Plot</h3>
+<pre class="r"><code>plotly::ggplotly(plot1) %&gt;%
+  as.widget() %&gt;% list() %&gt;% tagList()</code></pre>
+<div id="htmlwidget-9c91a3a8b6674cd3f6f8" style="width:100%;height:400px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9c91a3a8b6674cd3f6f8">{"x":{"data":[{"orientation":"v","width":[0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999],"base":[0,0,0,0,0,0,0,0,0,0,0,0],"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[3,4,1,5,2,4,5,5,3,5,3,4],"text":["Month_Ordered:  1<br />Variable_1: 3","Month_Ordered:  2<br />Variable_1: 4","Month_Ordered:  3<br />Variable_1: 1","Month_Ordered:  4<br />Variable_1: 5","Month_Ordered:  5<br />Variable_1: 2","Month_Ordered:  6<br />Variable_1: 4","Month_Ordered:  7<br />Variable_1: 5","Month_Ordered:  8<br />Variable_1: 5","Month_Ordered:  9<br />Variable_1: 3","Month_Ordered: 10<br />Variable_1: 5","Month_Ordered: 11<br />Variable_1: 3","Month_Ordered: 12<br />Variable_1: 4"],"type":"bar","marker":{"autocolorscale":false,"color":"rgba(89,89,89,1)","line":{"width":1.88976377952756,"color":"transparent"}},"showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","mode":"","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[3,4,1,5,2,4,5,5,3,5,3,4],"text":["Month_Ordered:  1<br />Variable_1: 3","Month_Ordered:  2<br />Variable_1: 4","Month_Ordered:  3<br />Variable_1: 1","Month_Ordered:  4<br />Variable_1: 5","Month_Ordered:  5<br />Variable_1: 2","Month_Ordered:  6<br />Variable_1: 4","Month_Ordered:  7<br />Variable_1: 5","Month_Ordered:  8<br />Variable_1: 5","Month_Ordered:  9<br />Variable_1: 3","Month_Ordered: 10<br />Variable_1: 5","Month_Ordered: 11<br />Variable_1: 3","Month_Ordered: 12<br />Variable_1: 4"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(0,0,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":31.4155251141553},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.0449999999999999,13.045],"tickmode":"array","ticktext":["0.0","2.5","5.0","7.5","10.0","12.5"],"tickvals":[0,2.5,5,7.5,10,12.5],"categoryorder":"array","categoryarray":["0.0","2.5","5.0","7.5","10.0","12.5"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Month_Ordered","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.25,5.25],"tickmode":"array","ticktext":["0","1","2","3","4","5"],"tickvals":[0,1,2,3,4,5],"categoryorder":"array","categoryarray":["0","1","2","3","4","5"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Variable_1","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"85fe2d4518a3":{"x":{},"y":{},"type":"bar"},"85fe13548c8d":{"x":{},"y":{}},"85fe13d786e5":{"x":{},"y":{}}},"cur_data":"85fe2d4518a3","visdat":{"85fe2d4518a3":["function (y) ","x"],"85fe13548c8d":["function (y) ","x"],"85fe13d786e5":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
