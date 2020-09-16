@@ -46,10 +46,12 @@ DT::datatable(dataset,
               options = list(pageLength = 5, scrollX=T) )
 ```
 
-### Example Plot
+### Example Plot #1
 
 ```{r}
-plot1 <- ggplot2::ggplot(dataset, aes(x = Month_Ordered, y = Variable_1)) +
+plot1 <- dataset %>%
+  dplyr::filter(Group==1) %>%
+  ggplot2::ggplot(., aes(x = Month_Ordered, y = Variable_1)) +
   geom_bar(stat="identity") +
   geom_line() +
   geom_point()
@@ -58,10 +60,28 @@ plot1
 ```
 
 
-### Example Dynamic Plot
+### Example Dynamic Plot #1
 
 ```{r}
 plotly::ggplotly(plot1)
 ```
 
 
+### Example Plot #2
+
+```{r}
+dataset$Group<-as.factor(dataset$Group)
+
+plot2<-dataset %>%
+  ggplot(aes(x=Month_Ordered, y=Variable_2, group=Group, color=Group)) +
+  geom_line() +
+  geom_point()
+
+plot2
+```
+
+### Example Dynamic Plot #2
+
+```{r}
+plotly::ggplotly(plot2)
+```
