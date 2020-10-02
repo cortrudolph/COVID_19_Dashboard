@@ -11,14 +11,14 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE, include = F, echo = F)
+knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 library(ggplot2)
 library(dplyr)
 library(plotly)
 source("data/variables.R")
 ```
 
-# Einleitung
+# Introduction
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
@@ -67,12 +67,3 @@ density_HO_T1
 
 As can be seen, before the COVID-19 Crisis hit, work from home was rather sparse. Only `r nrow(na.omit(data_HO[data_HO$T1_home_office>0,2]))` of the `r length(na.omit(data_HO$T1_home_office))` participants, who answered this question, had indicated that they worked from home at all (equalling `r round((nrow(na.omit(data_HO[data_HO$T1_home_office>0,2]))/length(na.omit(data_HO$T1_home_office)))*100,digits = 2)`%)  
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
